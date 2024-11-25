@@ -1,6 +1,6 @@
 ---
 - name: Create a tenant
-  hosts: localhost
+  hosts: apic
   gather_facts: false
   connection: local
 
