@@ -13,3 +13,4 @@
         tenant: "{{ tenant_name }}"
         description: Created by Ansible
         state: present
+        host: "{{ inventory_hostname }}"
