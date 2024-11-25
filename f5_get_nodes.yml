@@ -1,0 +1,11 @@
+---
+- name: Find all LTM nodes
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Get nodes
+      f5networks.f5_modules.bigip_device_info:
+        gather_subset:
+          - nodes

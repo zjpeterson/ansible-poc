@@ -1,0 +1,15 @@
+---
+- name: Create a tenant
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars:
+    tenant_name: ansible-tenant-1
+
+  tasks:
+    - name: Add a new tenant
+      cisco.aci.aci_tenant:
+        tenant: "{{ tenant_name }}"
+        description: Created by Ansible
+        state: present

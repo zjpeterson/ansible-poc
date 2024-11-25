@@ -1,0 +1,32 @@
+---
+- name: Create a pool with members
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars:
+    pool_name: test_pool
+    pool_monitors:
+      - http
+    pool_members:
+      - name: web1
+        address: 10.10.10.10
+        port: 80
+      - name: web2
+        address: 10.10.10.11
+        port: 80
+
+  tasks:
+    - name: Create pool
+      f5networks.f5_modules.bigip_pool:
+        name: "{{ pool_name }}"
+        lb_method: "{{ pool_lb_method }}"
+        monitors: "{{ pool_monitors }}"
+
+    - name: Create pool members
+      f5networks.f5_modules.bigip_pool_member:
+        pool: "{{ pool_name }}"
+        name: "{{ item.name }}"
+        host: "{{ item.address }}"
+        port: "{{ item.port }}"
+      loop: "{{ pool_members }}"
