@@ -1,0 +1,19 @@
+---
+- name: Add a syslog server
+  hosts: ltm
+  gather_facts: false
+  connection: local
+
+  vars:
+    syslog_name: test1
+    syslog_host: 10.0.1.1
+    syslog_port: 514
+
+  tasks:
+    - name: Set syslog server
+      f5networks.f5_modules.bigip_command:
+        commands: >-
+          modify /sys syslog remote-servers add {
+          {{ syslog_name }} {
+          host {{ syslog_host }}
+          remote-port {{ syslog_port }} } }
