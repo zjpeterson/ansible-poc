@@ -137,3 +137,20 @@ env:
   NETBOX_API: '{{ api }}'
   NETBOX_TOKEN: '{{ token }}'
 ```
+
+## Meraki Dashboard
+### Input
+```yaml
+fields:
+  - id: key
+    type: string
+    label: Meraki Dashboard API Key
+    secret: true
+required:
+  - key
+```
+### Injector
+```yaml
+env:
+  MERAKI_DASHBOARD_API_KEY: '{{ key }}'
+```
