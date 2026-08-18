@@ -1,0 +1,22 @@
+---
+- name: Check the version of NX-OS running
+  hosts: nxos1
+  gather_facts: false
+
+  vars:
+    intended_version: "10.4(7)"
+
+  tasks:
+    - name: Gather facts
+      cisco.nxos.nxos_facts:
+        gather_subset: min
+
+    - name: Display version
+      ansible.builtin.debug:
+        var: ansible_facts.net_version
+
+    - name: Validate version
+      ansible.builtin.assert:
+        that: ansible_facts.net_version == intended_version
+        success_msg: Running version was {{ intended_version }}
+        fail_msg: Running version was not {{ intended_version }}
