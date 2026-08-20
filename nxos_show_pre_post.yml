@@ -1,5 +1,5 @@
 ---
-- name: Compare interface data pre and post-change
+- name: Compare show command data pre and post-change
   hosts: nxos1
   gather_facts: false
 
