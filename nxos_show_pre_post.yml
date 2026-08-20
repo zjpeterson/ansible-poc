@@ -1,0 +1,39 @@
+---
+- name: Compare interface data pre and post-change
+  hosts: nxos1
+  gather_facts: false
+
+  vars:
+    commands:
+      - show acl status
+
+  pre_tasks:
+    - name: Gather show command output pre-change
+      cisco.nxos.nxos_command:
+        commands: "{{ commands }}"
+      register: command_out
+
+    - name: Save gathered info
+      ansible.builtin.set_fact:
+        data_pre: "{{ command_out }}"
+
+  tasks:
+    - name: Placeholder change action
+      ansible.builtin.debug:
+        msg: change action goes here...
+
+  post_tasks:
+    - name: Gather show command output post-change
+      cisco.nxos.nxos_command:
+        commands: "{{ commands }}"
+      register: command_out
+
+    - name: Save gathered info
+      ansible.builtin.set_fact:
+        data_post: "{{ command_out }}"
+
+    - name: Compare command data
+      ansible.builtin.assert:
+        that: data_pre.stdout == data_post.stdout
+        success_msg: Command data matched pre and post change
+        fail_msg: Command data did not match pre and post change
