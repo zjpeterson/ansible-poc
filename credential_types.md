@@ -115,3 +115,42 @@ env:
   F5_PASSWORD: "{{ password }}"
   F5_VALIDATE_CERTS: "{{ validate_certs }}"
 ```
+
+## Netbox
+### Input
+```yaml
+fields:
+  - id: api
+    type: string
+    label: API Endpoint
+  - id: token
+    type: string
+    label: API Token
+    secret: true
+required:
+  - api
+  - token
+```
+### Injector
+```yaml
+env:
+  NETBOX_API: '{{ api }}'
+  NETBOX_TOKEN: '{{ token }}'
+```
+
+## Meraki Dashboard
+### Input
+```yaml
+fields:
+  - id: key
+    type: string
+    label: Meraki Dashboard API Key
+    secret: true
+required:
+  - key
+```
+### Injector
+```yaml
+env:
+  MERAKI_DASHBOARD_API_KEY: '{{ key }}'
+```

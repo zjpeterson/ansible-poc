@@ -1,0 +1,33 @@
+---
+- name: Compare interface data pre and post-change
+  hosts: nxos1
+  gather_facts: false
+
+  pre_tasks:
+    - name: Gather facts pre-change
+      cisco.nxos.nxos_facts:
+        gather_subset: interfaces
+
+    - name: Save gathered info
+      ansible.builtin.set_fact:
+        data_pre: "{{ ansible_facts }}"
+
+  tasks:
+    - name: Placeholder change action
+      ansible.builtin.debug:
+        msg: change action goes here...
+
+  post_tasks:
+    - name: Gather facts post-change
+      cisco.nxos.nxos_facts:
+        gather_subset: interfaces
+
+    - name: Save gathered info
+      ansible.builtin.set_fact:
+        data_post: "{{ ansible_facts }}"
+
+    - name: Compare interface data
+      ansible.builtin.assert:
+        that: data_pre.net_interfaces == data_post.net_interfaces
+        success_msg: Fact data matched pre and post change
+        fail_msg: Fact data did not match pre and post change

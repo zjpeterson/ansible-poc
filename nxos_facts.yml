@@ -1,0 +1,13 @@
+---
+- name: Get NX-OS facts
+  hosts: nxos1
+  gather_facts: false
+
+  tasks:
+    - name: Gather facts
+      cisco.nxos.nxos_facts:
+        gather_subset: "!config"
+
+    - name: Display gathered info
+      ansible.builtin.debug:
+        var: ansible_facts
