@@ -2,10 +2,12 @@
 
 This is a document outlining an opinionated process for installing a tester AAP environment during a Proof of Concept (PoC) or similar situation. It takes you through the entire process and vaults all local admin passwords so as to not leave password data in plaintext.
 
-The only software being used in this process that does not come with a minimal RHEL install is wget and of course ansible-core.  
+The only software being used in this process that does not come with a minimal RHEL install is `wget` and of course `ansible-core`.  
 **There are no external scripts to get, and no repos to clone.**
 
 This document presumes an AAP 2.7 VM-based containerized install in the single-machine [Growth Topology](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/plan-ref_cont_a_env_a).
+
+There are less complex methods of doing this, but they tend to involve manual effort editing files (longer time taken overall) and less care in managing credentials. We are striking a balance here.
 
 # Why don’t we automate this?
 
@@ -14,9 +16,6 @@ This document presumes an AAP 2.7 VM-based containerized install in the single-m
 - There is no automated process for this which is covered by an AAP support agreement. Therefore you would need to utilize unsupported code. Even validated content like `infra.aap_utilities` does not fall under any support agreement.  
 - A typical participant in a PoC doesn’t know Ansible yet. It’s not a good time to get into writing Ansible just to install the product.
 
-# This is pretty long...
-
-There are less complex methods of doing this, but they tend to involve manual effort editing files (longer time taken overall) and less care in managing credentials. We are striking a balance here.
 
 # Install procedure
 
